@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bong-Min Jin | Computational Process Engineering</title>
+  <meta name="description" content="Bong-Min Jin, Ph.D. student in Mechanical Engineering working on CFD, multiphase flow, reaction kinetics, and deep learning.">
+  <style>
+    :root {
+      --bg: #f7f9fb;
+      --paper: #ffffff;
+      --ink: #1f2933;
+      --muted: #637083;
+      --line: #d9e0e8;
+      --steel: #315f86;
+      --teal: #2f766f;
+      --soft-steel: #e9f0f6;
+      --soft-teal: #e8f4f2;
+      --shadow: 0 10px 28px rgba(31, 41, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Pretendard, "Noto Sans KR", "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--steel);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin: 0 -22px 22px;
+      padding: 10px 22px;
+      border-bottom: 1px solid rgba(217, 224, 232, 0.9);
+      background: rgba(247, 249, 251, 0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav a {
+      color: var(--muted);
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      line-height: 1;
+      padding: 9px 12px;
+      cursor: pointer;
+    }
+
+    .lang-switch button.active {
+      background: var(--steel);
+      color: #ffffff;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .section,
+    .mini-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .subtitle {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 680px;
+    }
+
+    .summary {
+      margin: 22px 0 0;
+      max-width: 780px;
+      font-size: 15px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--soft-steel);
+      color: #294f70;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .fact {
+      border-left: 3px solid var(--teal);
+      padding-left: 13px;
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .fact span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 14px;
+      border-radius: 7px;
+      border: 1px solid var(--steel);
+      background: var(--steel);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .button.secondary {
+      background: #ffffff;
+      color: var(--steel);
+    }
+
+    .section {
+      padding: 26px;
+      margin-top: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 13px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+      text-align: right;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-card {
+      box-shadow: none;
+      padding: 18px;
+      background: #fbfcfd;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .project-stage {
+      margin: 24px 0 4px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--steel);
+      background: var(--soft-steel);
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #294f70;
+    }
+
+    .project-stage:first-child {
+      margin-top: 0;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+      gap: 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item:last-child {
+      border-bottom: 0;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .item h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+    }
+
+    .role {
+      margin: 0 0 7px;
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list {
+      display: grid;
+      gap: 13px;
+      counter-reset: entry;
+    }
+
+    .list-entry {
+      position: relative;
+      padding: 0 0 13px 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .list-entry:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .list-entry::before {
+      counter-increment: entry;
+      content: "[" counter(entry) "]";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--steel);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .title {
+      font-weight: 800;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .doi {
+      word-break: break-word;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill-group {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfcfd;
+    }
+
+    .skill-group h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .skill-group p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 22px;
+      padding: 20px 4px 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    [data-lang] {
+      display: none !important;
+    }
+
+    body.lang-en [data-lang="en"],
+    body.lang-kr [data-lang="kr"] {
+      display: revert !important;
+    }
+
+    body.lang-en .fact [data-lang="en"],
+    body.lang-kr .fact [data-lang="kr"] {
+      display: block !important;
+    }
+
+    body.lang-kr {
+      word-break: keep-all;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        padding: 18px 14px 42px;
+      }
+
+      .topbar,
+      .hero,
+      .focus-grid,
+      .skills,
+      .item {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        margin: 0 -14px 18px;
+        padding: 10px 14px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero-main,
+      .hero-side,
+      .section {
+        padding: 20px;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 6px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body class="lang-en">
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="#top">Bong-Min Jin</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#research" data-lang="en">Research</a>
+        <a href="#research" data-lang="kr">연구</a>
+        <a href="#publications" data-lang="en">Publications</a>
+        <a href="#publications" data-lang="kr">논문</a>
+        <a href="#projects" data-lang="en">Projects</a>
+        <a href="#projects" data-lang="kr">프로젝트</a>
+        <a href="#contact" data-lang="en">Contact</a>
+        <a href="#contact" data-lang="kr">연락처</a>
+        <span class="lang-switch" aria-label="Language switcher">
+          <button type="button" class="active" data-set-lang="en">EN</button>
+          <button type="button" data-set-lang="kr">KR</button>
+        </span>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="hero-main">
+        <div class="eyebrow" data-lang="en">Ph.D. Student · Mechanical Engineering</div>
+        <div class="eyebrow" data-lang="kr">기계공학과 박사과정</div>
+        <h1 data-lang="en"><span>Multiphysics simulation for</span><span>industrial processes and</span><span>data-driven modeling.</span></h1>
+        <h1 data-lang="kr"><span>산업 공정을 위한</span><span>다물리 시뮬레이션 및</span><span>데이터 기반 모델링</span></h1>
+        <p class="subtitle" data-lang="en">I work on CFD, multiphase flow, reaction kinetics, and deep learning.</p>
+        <p class="subtitle" data-lang="kr">CFD, 다상유동, 반응속도론, 딥러닝을 연구합니다.</p>
+        <p class="summary" data-lang="en">My research connects physics-based process simulation with practical industrial R&amp;D problems, including fluidized bed reactors, reduction kinetics, thermal process analysis, and model acceleration.</p>
+        <p class="summary" data-lang="kr">물리 기반 공정 시뮬레이션을 실제 산업 R&amp;D 문제와 연결하는 데 관심이 있으며, 유동층 반응기, 환원 반응속도, 열공정 해석, 모델 가속화 연구를 수행하고 있습니다.</p>
+        <div class="pill-row" aria-label="Research keywords">
+          <span class="pill">CFD</span>
+          <span class="pill">Multiphase Flow</span>
+          <span class="pill">Fluidized Bed</span>
+          <span class="pill">Hydrogen Reduction</span>
+          <span class="pill">ROM</span>
+          <span class="pill">Deep Learning</span>
+        </div>
+        <div class="cta-row">
+          <a class="button" href="mailto:wlsqhdaksek@inha.edu" data-lang="en">Email</a>
+          <a class="button" href="mailto:wlsqhdaksek@inha.edu" data-lang="kr">이메일</a>
+          <a class="button secondary" href="#publications" data-lang="en">View Publications</a>
+          <a class="button secondary" href="#publications" data-lang="kr">논문 보기</a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Profile facts">
+        <div class="fact">
+          <strong data-lang="en">Current Position</strong>
+          <strong data-lang="kr">현재 소속</strong>
+          <span data-lang="en">Ph.D. student,<br>Department of Mechanical Engineering,<br>Inha University</span>
+          <span data-lang="kr">인하대학교 기계공학과<br>박사과정</span>
+        </div>
+        <div class="fact">
+          <strong data-lang="en">Advisor</strong>
+          <strong data-lang="kr">지도교수</strong>
+          <span data-lang="en">Professor Hyunjin Yang</span>
+          <span data-lang="kr">양현진 교수</span>
+        </div>
+        <div class="fact">
+          <strong data-lang="en">Previous Degree</strong>
+          <strong data-lang="kr">이전 학위</strong>
+          <span data-lang="en">M.S. and B.S. in<br>Materials Science and Engineering,<br>Inha University</span>
+          <span data-lang="kr">인하대학교 신소재공학<br>석사 및 학사</span>
+        </div>
+        <div class="fact">
+          <strong data-lang="en">Location</strong>
+          <strong data-lang="kr">위치</strong>
+          <span data-lang="en">Incheon,<br>South Korea</span>
+          <span data-lang="kr">인천,<br>대한민국</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="research">
+      <div class="section-header">
+        <h2 data-lang="en">Research Focus</h2>
+        <h2 data-lang="kr">연구 분야</h2>
+        <p class="section-note" data-lang="en">Physics-based modeling with industrial context</p>
+        <p class="section-note" data-lang="kr">산업 문제와 연결된 물리 기반 모델링</p>
+      </div>
+      <div class="focus-grid">
+        <article class="mini-card">
+          <h3 data-lang="en">Gas-Solid Multiphase Flow</h3>
+          <h3 data-lang="kr">기체-고체 다상유동</h3>
+          <p data-lang="en">Numerical modeling of gas-solid fluidized beds.</p>
+          <p data-lang="kr">Gas-solid fluidized bed를 수치해석적으로 모델링합니다.</p>
+        </article>
+        <article class="mini-card">
+          <h3 data-lang="en">Hydrogen Reduction Processes</h3>
+          <h3 data-lang="kr">수소 환원 공정</h3>
+          <p data-lang="en">Analyzing reaction kinetics coupled with CFD.</p>
+          <p data-lang="kr">반응속도론과 CFD를 결합한 해석을 수행합니다.</p>
+        </article>
+        <article class="mini-card">
+          <h3 data-lang="en">CFD-ML Coupled Modeling</h3>
+          <h3 data-lang="kr">CFD-ML 연계 모델링</h3>
+          <p data-lang="en">Developing acceleration models by coupling CFD with machine learning and deep learning.</p>
+          <p data-lang="kr">CFD와 머신러닝/딥러닝을 결합한 해석 가속화 모델을 연구합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="section-header">
+        <h2 data-lang="en">Publications</h2>
+        <h2 data-lang="kr">논문</h2>
+        <p class="section-note" data-lang="en">Published and in preparation</p>
+        <p class="section-note" data-lang="kr">게재 및 준비 중 논문</p>
+      </div>
+      <div class="list">
+        <article class="list-entry">
+          <div class="title">Pressure-Field-Based Flow Field Reconstruction of Gas-Solid Fluidized Bed using Deep Learning</div>
+          <div class="meta"><strong>BM. Jin</strong>, S. Seo, S. Sim and H. Yang. Manuscript in preparation; results analysis ongoing, 2026.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Numerical analysis of hydrogen-based iron ore reduction in a fluidized bed reactor: influence of distributor plate on reaction kinetics</div>
+          <div class="meta"><strong>BM. Jin</strong>, H. Kim and H. Yang. Under minor revision, <em>Cleaner Engineering and Technology</em>, 2026.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Numerical investigation of cold fluidization behavior using a Dual-Size Eulerian Model (DSEM): Effects of particle size on hydrodynamics in fluidized bed reactors</div>
+          <div class="meta">S. Sim, <strong>BM. Jin</strong> and H. Yang. <em>Powder Technology</em>, 2026. <span class="doi">DOI: <a href="https://doi.org/10.1016/j.powtec.2026.122415">10.1016/j.powtec.2026.122415</a></span></div>
+        </article>
+        <article class="list-entry">
+          <div class="title">A Practical 1D Approach for Real-Time Prediction of Argon Flow and Pressure in Continuous Casting of Steel</div>
+          <div class="meta">H. Yang, <strong>BM. Jin</strong>, H. Kim, S. Seo and S. Sim. <em>Metals</em>, 2025. <span class="doi">DOI: <a href="https://doi.org/10.3390/met15090978">10.3390/met15090978</a></span></div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Evaluation of Classification Possibility of Coke Breeze by Drag Force</div>
+          <div class="meta">J. A. Lee, <strong>BM. Jin</strong> and J. W. Han. <em>Archives of Metallurgy and Materials</em>, 151-156, 2024. <span class="doi">DOI: <a href="https://doi.org/10.24425/amm.2024.147804">10.24425/amm.2024.147804</a></span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="patents">
+      <div class="section-header">
+        <h2 data-lang="en">Patents</h2>
+        <h2 data-lang="kr">특허</h2>
+        <p class="section-note" data-lang="en">Applications in process modeling and continuous casting</p>
+        <p class="section-note" data-lang="kr">공정 모델링 및 연속주조 관련 출원</p>
+      </div>
+      <div class="list">
+        <article class="list-entry">
+          <div class="title">Method and System for Predicting Argon Gas Line Pressure and Flow Rate in Continuous Casting Process</div>
+          <div class="meta">KR-Application No. 10-2025-0103894. H. Yang, <strong>BM. Jin</strong>, H. Kim, S. Seo and S. Sim. In process, 2025.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Stopper Nozzle for Continuous Casting</div>
+          <div class="meta">KR-Application No. 10-2025-0120688. H. Yang, <strong>BM. Jin</strong>, H. Kim, S. Seo and S. Sim. In process, 2025.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="conferences">
+      <div class="section-header">
+        <h2 data-lang="en">Conference Presentations</h2>
+        <h2 data-lang="kr">학회 발표</h2>
+        <p class="section-note" data-lang="en">Selected oral and poster presentations</p>
+        <p class="section-note" data-lang="kr">주요 구두 및 포스터 발표</p>
+      </div>
+      <div class="list">
+        <article class="list-entry">
+          <div class="title">Accelerated prediction of dynamic behavior in bubbling fluidized beds using a deep learning-based reduced-order model</div>
+          <div class="meta"><strong>BM. Jin</strong>, S. Seo, S. Sim and H. Yang. KIM, 2026. Oral.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Simulation of cold fluidized beds using a dual-size multiphase flow model and analysis of particle size effects</div>
+          <div class="meta">S. Sim, <strong>BM. Jin</strong> and H. Yang. KIM, 2026.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Simulation of reduction reaction behavior in a fluidized bed with and without a distributor using mathematical modeling</div>
+          <div class="meta"><strong>BM. Jin</strong> and H. Yang. KIM, 2025. Oral.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Mathematical Modeling of Hydrogen Reduction in a Fluidized Bed with a Distributor Plate</div>
+          <div class="meta"><strong>BM. Jin</strong> and H. Yang. ICS 2025. Oral.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Development of a machine learning-based reduced-order model for acceleration of fluidized bed simulations</div>
+          <div class="meta">S. Seo, <strong>BM. Jin</strong> and H. Yang. KIM, 2025. Poster.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Evaluation of fluidization characteristics in a fluidized bed using a multi-size multiphase flow model: Comparative analysis with a single-size model</div>
+          <div class="meta">S. Sim, <strong>BM. Jin</strong> and H. Yang. KIM, 2025. Poster.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Simulation of hydrogen reduction reactions between fines and gas in a fluidized reduction furnace</div>
+          <div class="meta"><strong>BM. Jin</strong> and H. Yang. KIM, 2024.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Simulation of flow behavior characteristics according to the temperature difference between fines and gas in a multi-stage fluidized reduction furnace</div>
+          <div class="meta"><strong>BM. Jin</strong> and H. Yang. KIM, 2024.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Evaluation of inertial classification performance for particle size separation of coke breeze for sintering</div>
+          <div class="meta"><strong>BM. Jin</strong>, J. Lee, K. Kim and J. Han. KIM, 2023. Oral.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Microstructure classification and analysis according to pre-strain using a CNN algorithm</div>
+          <div class="meta">K. Pyeon, <strong>BM. Jin</strong>, M. Lee and B. Jang. KIM, 2022. Poster.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">Study on the separation of coke breeze in the sintering process</div>
+          <div class="meta"><strong>BM. Jin</strong>, J. Lee, K. Kim and J. Han. KIM, 2022. Poster.</div>
+        </article>
+        <article class="list-entry">
+          <div class="title">A study on coke breeze separation technology using a belt conveyor</div>
+          <div class="meta"><strong>BM. Jin</strong>, J. Lee, K. Kim and J. Han. Steel Science Forum, 2022.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-header">
+        <h2 data-lang="en">Industrial and Research Projects</h2>
+        <h2 data-lang="kr">산업 및 연구 프로젝트</h2>
+        <p class="section-note" data-lang="en">Selected from graduate research experience</p>
+        <p class="section-note" data-lang="kr">대학원 연구 경험 기반 주요 과제</p>
+      </div>
+      <div class="timeline">
+        <h3 class="project-stage" data-lang="en">Doctoral Research Projects</h3>
+        <h3 class="project-stage" data-lang="kr">박사과정 연구 프로젝트</h3>
+        <article class="item">
+          <div class="date">Aug. 2025 - Oct. 2025</div>
+          <div>
+            <h3 data-lang="en">Interface Analysis Methodology for Liquid Flow Design in Liquid Light-Shielding Films</h3>
+            <h3 data-lang="kr">액체 차광 필름 채널의 액체 유동 설계를 위한 계면 분석 방법론</h3>
+            <p class="role">LG Electronics · Graduate Researcher</p>
+            <p data-lang="en">Supported basic simulation design for liquid flow behavior and established an interface analysis approach for evaluating liquid phase behavior in channel design.</p>
+            <p data-lang="kr">액체 차광 필름 채널 내 액체 유동 거동의 기초 시뮬레이션 설계를 지원하고, 채널 설계 평가를 위한 계면 분석 방법론을 정리했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Apr. 2025 - Jan. 2026</div>
+          <div>
+            <h3 data-lang="en">2D CFD Model for Particle-Scale Reduction and Reduction Rate Prediction</h3>
+            <h3 data-lang="kr">입자 규모 환원 및 환원율 예측을 위한 2D CFD 모델 개발</h3>
+            <p class="role">POSCO E&amp;C · Main Researcher</p>
+            <p data-lang="en">Developed a 2D CFD model based on recent particle-scale reduction models and evaluated reduction kinetics for process-level prediction.</p>
+            <p data-lang="kr">최신 입자 규모 환원 모델을 기반으로 2D CFD 모델을 개발하고, 공정 수준 환원율 예측을 위한 반응속도 모델을 구현 및 평가했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Apr. 2025 - Jan. 2026</div>
+          <div>
+            <h3 data-lang="en">Multisize Multiphase Flow Modeling for Hydrogen-Based Fluidized Bed Reduction</h3>
+            <h3 data-lang="kr">수소 기반 유동층 환원 공정을 위한 다입도 다상유동 모델링</h3>
+            <p class="role">Inha University · Main Researcher</p>
+            <p data-lang="en">Conducted multisize multiphase flow modeling for hydrogen-based fluidized bed reduction and contributed to a related research paper.</p>
+            <p data-lang="kr">수소 기반 유동층 환원 공정의 다입도 다상유동 모델링을 수행하고 관련 논문 작성에 기여했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Jul. 2024 - Apr. 2025</div>
+          <div>
+            <h3 data-lang="en">Multiphysics Process Simulation for DRI Raw Material Drying and Exhaust Gas Systems</h3>
+            <h3 data-lang="kr">DRI 원료 건조 및 배가스 시스템의 다중물리 공정 시뮬레이션</h3>
+            <p class="role">POSCO E&amp;C · Main Researcher</p>
+            <p data-lang="en">Developed a simulation framework for DRI raw material drying and analyzed drying behavior and exhaust gas flow characteristics.</p>
+            <p data-lang="kr">DRI 원료 건조 공정의 시뮬레이션 프레임워크를 개발하고 건조 거동 및 배가스 유동 특성을 분석했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Jan. 2024 - Oct. 2024</div>
+          <div>
+            <h3 data-lang="en">Induction Heating Process Analysis Model for Ag Sintered Bodies</h3>
+            <h3 data-lang="kr">Ag 소결체 유도 가열 공정 해석 모델 개발</h3>
+            <p class="role">LG Electronics · Main Researcher</p>
+            <p data-lang="en">Developed a numerical model for Ag melting behavior under induction heating and evaluated thermal and phase-change behavior.</p>
+            <p data-lang="kr">유도 가열 조건에서 Ag 용융 거동을 해석하는 수치 모델을 개발하고 열 및 상변화 거동을 평가했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Jul. 2023 - Sep. 2024</div>
+          <div>
+            <h3 data-lang="en">Thermal Stress and Fatigue Analysis of Hydrogen Reduction Furnace Structures</h3>
+            <h3 data-lang="kr">수소 환원로 구조물의 열응력 및 피로 해석</h3>
+            <p class="role">POSCO E&amp;C · Main Researcher</p>
+            <p data-lang="en">Extracted and analyzed simulation data for hydrogen reduction furnace operation and supported thermal stress and fatigue analysis under high-temperature operating conditions.</p>
+            <p data-lang="kr">수소 환원로 운전 시뮬레이션 데이터를 추출 및 분석하고, 고온 운전 조건에서 구조물의 열응력 및 피로 해석을 지원했습니다.</p>
+          </div>
+        </article>
+        <h3 class="project-stage" data-lang="en">Master's Research Projects</h3>
+        <h3 class="project-stage" data-lang="kr">석사과정 연구 프로젝트</h3>
+        <article class="item">
+          <div class="date">Sep. 2022 - Aug. 2023</div>
+          <div>
+            <h3 data-lang="en">Numerical Design and Performance Testing for SiO (Silicon Monoxide) Reactors</h3>
+            <h3 data-lang="kr">SiO 반응기의 수치 설계 및 성능 평가</h3>
+            <p class="role">POSCO · Main Researcher</p>
+            <p data-lang="en">Investigated dissolution behavior based on melt level variations using a water model apparatus and developed a numerical design framework for SiO reactors.</p>
+            <p data-lang="kr">수모델 실험 장치를 활용해 용탕 레벨 변화에 따른 용해 거동을 조사하고, SiO 반응기의 수치 설계 프레임워크와 장치 성능 검증을 수행했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Aug. 2022 - Aug. 2023</div>
+          <div>
+            <h3 data-lang="en">Numerical Analysis of Secondary Combustion Using 2-ton Pilot Converter Empirical Data</h3>
+            <h3 data-lang="kr">2톤 파일럿 전로 실험 데이터를 활용한 2차 연소 수치해석</h3>
+            <p class="role">POSCO · Graduate Researcher</p>
+            <p data-lang="en">Supported numerical model development for secondary combustion using empirical pilot converter data and assisted data processing and preliminary simulations.</p>
+            <p data-lang="kr">파일럿 전로 실험 데이터를 활용한 2차 연소 수치해석 모델 개발을 지원하고, 데이터 처리와 예비 해석을 수행했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Mar. 2022 - Jun. 2023</div>
+          <div>
+            <h3 data-lang="en">Separation Performance Evaluation for Coke Breeze</h3>
+            <h3 data-lang="kr">소결용 코크스 브리즈 분리 성능 평가</h3>
+            <p class="role">POSCO Holdings · Main Researcher</p>
+            <p data-lang="en">Conducted classification experiments and CFD-DEM simulations to analyze and optimize particle separation using a conveyor belt-based system.</p>
+            <p data-lang="kr">컨베이어 벨트 기반 장치를 활용한 분급 실험과 CFD-DEM 해석을 수행하여 입자 분리 공정을 분석 및 최적화했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Sep. 2021 - Jun. 2023</div>
+          <div>
+            <h3 data-lang="en">Basic Model Development for Secondary Combustion Reactions in Pilot Converters</h3>
+            <h3 data-lang="kr">파일럿 전로 2차 연소 반응 기초 모델 개발</h3>
+            <p class="role">POSCO Holdings · Graduate Researcher</p>
+            <p data-lang="en">Established a fundamental physics-based model for analyzing secondary combustion in a 2-ton pilot converter as part of an R&amp;D collaboration.</p>
+            <p data-lang="kr">R&amp;D 협력 과제의 일환으로 2톤 규모 파일럿 전로의 2차 연소를 분석하기 위한 물리 기반 기초 모델을 구축했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Mar. 2022 - Feb. 2023</div>
+          <div>
+            <h3 data-lang="en">Advanced Materials-Based 3D Printing Professional Manpower Training Program</h3>
+            <h3 data-lang="kr">첨단소재 기반 3D 프린팅 전문인력 양성사업</h3>
+            <p class="role">KIAT · Graduate Researcher</p>
+            <p data-lang="en">Participated in a human resource development project focused on advanced material 3D printing technology supported by KIAT.</p>
+            <p data-lang="kr">KIAT 지원 첨단소재 3D 프린팅 기술 전문인력 양성사업에 참여했습니다.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div class="date">Jul. 2022 - Dec. 2022</div>
+          <div>
+            <h3 data-lang="en">Strategic Survey of CAE Technology Trends in Global Ironmaking Processes</h3>
+            <h3 data-lang="kr">글로벌 제철 공정 CAE 기술 동향 전략 조사</h3>
+            <p class="role">POSCO · Graduate Researcher</p>
+            <p data-lang="en">Conducted a technical survey of domestic and international CAE trends to identify future research directions in ironmaking.</p>
+            <p data-lang="kr">국내외 CAE 기술 동향을 조사하여 제철 공정의 향후 연구 방향을 도출하는 데 기여했습니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-header">
+        <h2 data-lang="en">Skills and Tools</h2>
+        <h2 data-lang="kr">기술 및 도구</h2>
+        <p class="section-note" data-lang="en">Simulation, analysis, and programming</p>
+        <p class="section-note" data-lang="kr">시뮬레이션, 해석, 프로그래밍</p>
+      </div>
+      <div class="skills">
+        <div class="skill-group">
+          <h3 data-lang="en">Research Interests</h3>
+          <h3 data-lang="kr">연구 관심사</h3>
+          <p>Multiphysics Modeling, CFD, Multiphase Flow, PINN, Reduced Order Model, Machine Learning, Deep Learning</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-lang="en">Simulation Tools</h3>
+          <h3 data-lang="kr">시뮬레이션 도구</h3>
+          <p>ANSYS Fluent, ANSYS Mechanical, Altair EDEM, ANSYS Rocky, FactSage</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-lang="en">Programming</h3>
+          <h3 data-lang="kr">프로그래밍</h3>
+          <p>Python, C</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-lang="en">Experimental and Analysis Experience</h3>
+          <h3 data-lang="kr">실험 및 분석 경험</h3>
+          <p>SEM, Optical Microscopy, sample polishing, XRD request-based analysis, basic TEM operation training</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="personal">
+      <div class="section-header">
+        <h2 data-lang="en">Beyond Research</h2>
+        <h2 data-lang="kr">연구 외 관심사</h2>
+        <p class="section-note" data-lang="en">A small personal note</p>
+        <p class="section-note" data-lang="kr">작은 개인적 메모</p>
+      </div>
+      <div class="skills">
+        <div class="skill-group">
+          <h3 data-lang="en">Games</h3>
+          <h3 data-lang="kr">게임</h3>
+          <p data-lang="en">League of Legends - Master<br>Marvel Rivals - Diamond<br>I sometimes joke that this gives me two master's degrees.</p>
+          <p data-lang="kr">League of Legends - Master<br>Marvel Rivals - Diamond<br>가끔 “마스터가 두 개”라고 농담합니다.</p>
+        </div>
+        <div class="skill-group">
+          <h3 data-lang="en">Game Development</h3>
+          <h3 data-lang="kr">게임 개발</h3>
+          <p data-lang="en">I like charming, playful games such as DokeV by Pearl Abyss and MapleStory 2 by Nexon, and I hope to build small games with AI-assisted tools.</p>
+          <p data-lang="kr">도깨비(펄어비스), 메이플스토리2(넥슨)처럼 아기자기한 게임을 좋아하며, AI 보조 도구를 활용해 작은 게임을 만들어보고 싶습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2 data-lang="en">Contact</h2>
+        <h2 data-lang="kr">연락처</h2>
+        <p class="section-note" data-lang="en">Research collaboration and R&amp;D opportunities</p>
+        <p class="section-note" data-lang="kr">연구 협업 및 R&amp;D 기회</p>
+      </div>
+      <div class="skills">
+        <div class="skill-group">
+          <h3>Email</h3>
+          <p><a href="mailto:wlsqhdaksek@inha.edu">wlsqhdaksek@inha.edu</a><br><a href="mailto:wlsqhdaks@gmail.com">wlsqhdaks@gmail.com</a></p>
+        </div>
+        <div class="skill-group">
+          <h3 data-lang="en">Affiliation</h3>
+          <h3 data-lang="kr">소속</h3>
+          <p data-lang="en">Inha University, 100 Inha-ro, Michuhol-gu, Incheon 22212, South Korea</p>
+          <p data-lang="kr">인하대학교, 인천광역시 미추홀구 인하로 100, 22212</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span data-lang="en">Built as a static GitHub Pages profile. Last updated 2026.</span>
+      <span data-lang="kr">정적 GitHub Pages 프로필로 제작. 2026년 업데이트.</span>
+    </footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-set-lang]");
+
+    function setLanguage(lang) {
+      document.body.classList.toggle("lang-en", lang === "en");
+      document.body.classList.toggle("lang-kr", lang === "kr");
+      document.documentElement.lang = lang === "kr" ? "ko" : "en";
+      buttons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.setLang === lang);
+      });
+      localStorage.setItem("profile-language", lang);
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.setLang));
+    });
+
+    setLanguage(localStorage.getItem("profile-language") || "en");
+  </script>
+</body>
+</html>
